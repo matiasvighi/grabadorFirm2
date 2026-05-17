@@ -67,6 +67,9 @@ function subirTodo() {
 
   if (intervaloLog) clearInterval(intervaloLog);
 
+  const boton = document.querySelector('.boton-grande[onclick="subirTodo()"]');
+  if (boton) { boton.disabled = true; boton.classList.add('cargando'); }
+
   const normalizar = (v) => v && v !== '— sin archivos —' ? v : null;
   fetch('/subirTodo', {
     method: 'POST',
@@ -88,6 +91,9 @@ function subirTodo() {
   .catch(error => {
     console.error('Error en subirTodo:', error);
     document.getElementById('resultadoTexto').innerHTML = 'Error al iniciar la subida: ' + error.message;
+  })
+  .finally(() => {
+    if (boton) { boton.disabled = false; boton.classList.remove('cargando'); }
   });
 }
 
