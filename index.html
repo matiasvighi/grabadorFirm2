@@ -17,7 +17,11 @@
     <div class="bloque">
       <h3 class="bloque-titulo">Firmware</h3>
       <div class="fila">
-        <input type="file" id="fileFirm">
+        <div class="file-picker">
+          <input type="file" id="fileFirm">
+          <button type="button" class="btn-file" onclick="document.getElementById('fileFirm').click()">Seleccionar</button>
+          <span class="file-name" id="fileFirmLabel">Ningún archivo</span>
+        </div>
         <button onclick="subirArchivo('fileFirm', '/upload/firms', 'comboFirm')">Subir Firm</button>
       </div>
       <div class="fila">
@@ -29,7 +33,11 @@
     <div class="bloque">
       <h3 class="bloque-titulo">Imagen</h3>
       <div class="fila">
-        <input type="file" id="fileImagen">
+        <div class="file-picker">
+          <input type="file" id="fileImagen">
+          <button type="button" class="btn-file" onclick="document.getElementById('fileImagen').click()">Seleccionar</button>
+          <span class="file-name" id="fileImagenLabel">Ningún archivo</span>
+        </div>
         <button onclick="subirArchivo('fileImagen', '/upload/imagenes', 'comboImagen')">Subir Imagen</button>
       </div>
       <div class="fila">
@@ -41,7 +49,11 @@
     <div class="bloque">
       <h3 class="bloque-titulo">Script</h3>
       <div class="fila">
-        <input type="file" id="fileScript">
+        <div class="file-picker">
+          <input type="file" id="fileScript">
+          <button type="button" class="btn-file" onclick="document.getElementById('fileScript').click()">Seleccionar</button>
+          <span class="file-name" id="fileScriptLabel">Ningún archivo</span>
+        </div>
         <button onclick="subirArchivo('fileScript', '/upload/scripts', 'comboScript')">Subir Script</button>
       </div>
       <div class="fila">

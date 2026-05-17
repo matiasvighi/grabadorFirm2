@@ -148,8 +148,28 @@ function descargarArchivos() {
   window.location.href = '/descargar';
 }
 
+function initFilePickers() {
+  const ids = ['fileFirm', 'fileImagen', 'fileScript'];
+  ids.forEach(id => {
+    const input = document.getElementById(id);
+    const label = document.getElementById(id + 'Label');
+    if (input && label) {
+      input.addEventListener('change', () => {
+        if (input.files && input.files[0]) {
+          label.textContent = input.files[0].name;
+          label.classList.add('tiene-archivo');
+        } else {
+          label.textContent = 'Ningún archivo';
+          label.classList.remove('tiene-archivo');
+        }
+      });
+    }
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   cargarCombos();
+  initFilePickers();
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       const modal = document.getElementById('progresoModal');
