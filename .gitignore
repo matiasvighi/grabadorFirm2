@@ -8,3 +8,4 @@ uploads/csvs/*
 !uploads/imagenes/.gitkeep
 !uploads/scripts/.gitkeep
 !uploads/csvs/.gitkeep
+!uploads/csvs/ejemplo_grabaciones.csv

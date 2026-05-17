@@ -1,0 +1,6 @@
+Timestamp_Grabado;Firmware;Imagen;Script;Resultado
+1747440000;blink_led.hex;;grabofirmattiny.bash;exito
+1747526400;firmware_esp.bin;littlefs.bin;grabofirmeimagen.bash;exito
+1747612800;sensor_temp.hex;;grabofirmattiny.bash;error
+1747699200;wifi_scan.bin;spiffs.bin;grabofirmeimagen.bash;exito
+1747785600;servo_control.hex;;grabofirmattiny.bash;exito
