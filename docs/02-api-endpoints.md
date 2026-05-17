@@ -1,5 +1,37 @@
 # API Endpoints del Backend
 
+## Flujo de subida y ejecución
+
+```mermaid
+sequenceDiagram
+    actor User as Usuario
+    participant UI as index.html
+    participant API as server.js
+    participant FS as Archivos
+
+    User->>UI: Selecciona archivo
+    User->>UI: Click "Subir Firm"
+    UI->>API: POST /upload/firms (FormData)
+    API->>FS: Guarda en uploads/firms/
+    API-->>UI: { ok: true }
+    UI->>UI: Refresca comboFirm
+
+    User->>UI: Selecciona firm del combo
+    User->>UI: Click "Subir Firm e Imagen"
+    UI->>API: POST /subirTodo {firm, imagen, script}
+    API->>API: Spawnea bash script
+    API-->>UI: { ok: true, logId }
+
+    loop Cada 1 segundo
+        UI->>API: GET /progreso
+        API-->>UI: Log de ejecución
+    end
+
+    API->>FS: Escribe CSV en uploads/csvs/
+    API-->>UI: Log completo con resultado
+    UI->>UI: Detiene polling al ver "completado"
+```
+
 ## Subida de archivos
 
 | Método | Ruta | Función |
