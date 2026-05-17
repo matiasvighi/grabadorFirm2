@@ -1,0 +1,10 @@
+node_modules/
+logs/progreso/
+uploads/firms/*
+uploads/imagenes/*
+uploads/scripts/*
+uploads/csvs/*
+!uploads/firms/.gitkeep
+!uploads/imagenes/.gitkeep
+!uploads/scripts/.gitkeep
+!uploads/csvs/.gitkeep

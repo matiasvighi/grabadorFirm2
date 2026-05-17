@@ -1,0 +1,41 @@
+Aca van las aclaraciones de la instalación del software específico, lamentablemente no fuí documentando todo así que pongo lo que voy encontrando, habría que hacer una prueba con una instalación desde 0 para testear.
+
+Pinout: El sistema está pensado para utilizar directamente las salidas integradas del raspi, de esa forma, no hay que utilizar hardware específico.
+
+Se utilizan los mismos pines para el ESP y para el ATiny85 
+ESP: 
+Reset: GPIO18 
+Gpio0ESP(se usa para cambiar el modo de ejecución): GPIO17 ,SCK en Attiny
+
+| TX (GPIO14) | RX | SDO |
+| --- | --- | --- |
+| Pin Raspy | Pin esp | PinAttiny |
+
+| RX (GPIO15) | TX | Sdi |
+| --- | --- | --- |
+
+![image.png](attachment:59ce2fac-0bf9-4358-b69d-cdfa1bbc5cc5:image.png)
+
+En el caso del ATTiny85, no se hacen scripts en Py para entrar y salir del modo prog, se edita el archivo /usr/local/etc/avrdude.conf
+
+Editando esta parte
+
+programmer # raspberry_pi_gpio
+id                     = "raspberry_pi_gpio";
+desc                   = "Raspberry Pi GPIO via sysfs/libgpiod";
+type                   = "linuxgpio";
+prog_modes             = PM_ISP;
+connection_type        = linuxgpio;
+reset                  = 18;
+sck                    = 17;
+sdo                    = 14;
+sdi                    = 15;
+;
+
+- el programa de averdude que me permitia instalar apt no me tomaba la edición del archivo por lo que tuve que bajar de github, compilar e instalar a mano.
+
+`https://codeload.github.com/avrdudes/avrdude/tar.gz/refs/tags/v8.0 -O v8.0.tar.gz`
+
+Para el Esp utilizamos arduino-cli y esptool. si mal no recuerdo hay que tirar un comando en arduino cli core install esp-32 o algo así para que tome ese tipo de MC.
+
+El cable utilizado es el mismo para ambos MC, y en la medida que se pueda trataremos de mantener este standar.

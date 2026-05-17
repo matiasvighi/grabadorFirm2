@@ -1,0 +1,13 @@
+# problema
+
+La cosa es bastante simple, Son tres archivos, un backend y un frontend que consta de un index (home), y otro html en donde se pueden visualizar los datos de las grabaciones anteriores, acorde a lo que estén en definido en los script bash que se hallan utilizado para grabar los firm.
+
+## Funcionamiento:
+
+El funcionamiento es bastante simple. la web te permite subir y seleccionar tanto firmware como Imágen de FS y tambíen te permite subir y seleccionar scripts, de manera que no tenés que entrar al sistema y editar cosas a menos que tengas que crear directorios nuevos o hacer cosas más complejas. tiene un boton para descargar los archivos generados y otro para visualizar los csv que hallamos creado en el script. recomiendo utilozar una conexión a una db para tenér una mayor integridad de datos.
+
+## Seguridad
+
+La versatilidad que te da poder subir scripts hace IMPERATIVO no tener publicada la página en internet, salvo que se le agregue un nivel de seguridad importante, es un cartel luminoso para rusos.Solución propuesta
+
+¿Qué cambios son necesarios para solucionar este problema y lograr los objetivos del proyecto?
