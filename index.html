@@ -13,50 +13,52 @@
 <div class="container">
   <img src="Logo.png" alt="Logo">
 
-  <div class="bloque">
-    <h3 class="bloque-titulo">Firmware</h3>
-    <div class="fila">
-      <input type="file" id="fileFirm">
-      <button onclick="subirArchivo('fileFirm', '/upload/firms', 'comboFirm')">Subir Firm</button>
+  <div class="bloques-grid">
+    <div class="bloque">
+      <h3 class="bloque-titulo">Firmware</h3>
+      <div class="fila">
+        <input type="file" id="fileFirm">
+        <button onclick="subirArchivo('fileFirm', '/upload/firms', 'comboFirm')">Subir Firm</button>
+      </div>
+      <div class="fila">
+        <label>Elegir Firm:</label>
+        <select id="comboFirm"></select>
+      </div>
     </div>
-    <div class="fila">
-      <label>Elegir Firm:</label>
-      <select id="comboFirm"></select>
-    </div>
-  </div>
 
-  <div class="bloque">
-    <h3 class="bloque-titulo">Imagen</h3>
-    <div class="fila">
-      <input type="file" id="fileImagen">
-      <button onclick="subirArchivo('fileImagen', '/upload/imagenes', 'comboImagen')">Subir Imagen</button>
+    <div class="bloque">
+      <h3 class="bloque-titulo">Imagen</h3>
+      <div class="fila">
+        <input type="file" id="fileImagen">
+        <button onclick="subirArchivo('fileImagen', '/upload/imagenes', 'comboImagen')">Subir Imagen</button>
+      </div>
+      <div class="fila">
+        <label>Elegir Imagen:</label>
+        <select id="comboImagen"></select>
+      </div>
     </div>
-    <div class="fila">
-      <label>Elegir Imagen:</label>
-      <select id="comboImagen"></select>
-    </div>
-  </div>
 
-  <div class="bloque">
-    <h3 class="bloque-titulo">Script</h3>
-    <div class="fila">
-      <input type="file" id="fileScript">
-      <button onclick="subirArchivo('fileScript', '/upload/scripts', 'comboScript')">Subir Script</button>
+    <div class="bloque">
+      <h3 class="bloque-titulo">Script</h3>
+      <div class="fila">
+        <input type="file" id="fileScript">
+        <button onclick="subirArchivo('fileScript', '/upload/scripts', 'comboScript')">Subir Script</button>
+      </div>
+      <div class="fila">
+        <label>Elegir Script:</label>
+        <select id="comboScript"></select>
+      </div>
     </div>
-    <div class="fila">
-      <label>Elegir Script:</label>
-      <select id="comboScript"></select>
-    </div>
-  </div>
 
-  <div class="bloque">
-    <h3 class="bloque-titulo">Acciones</h3>
-    <div class="botones-principales">
-      <button class="boton-grande" onclick="subirTodo()">Subir Firm e Imagen</button>
-      <button class="boton-grande" onclick="descargarArchivos()">Descargar archivos</button>
-      <a href="/verdatos.html" style="text-decoration:none;">
-        <button class="boton-grande">Visualizar Grabados</button>
-      </a>
+    <div class="bloque">
+      <h3 class="bloque-titulo">Acciones</h3>
+      <div class="botones-principales">
+        <button class="boton-grande" onclick="subirTodo()">Subir Firm e Imagen</button>
+        <button class="boton-grande" onclick="descargarArchivos()">Descargar archivos</button>
+        <a href="/verdatos.html" style="text-decoration:none;">
+          <button class="boton-grande">Visualizar Grabados</button>
+        </a>
+      </div>
     </div>
   </div>
 

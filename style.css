@@ -75,9 +75,20 @@ img {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1100px;
   margin: auto;
-  padding: 24px 20px;
+  padding: 32px 28px;
+}
+
+.bloques-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.bloques-grid .bloque {
+  margin: 0;
 }
 
 h1, h2, h3, label {
@@ -257,6 +268,27 @@ footer {
   max-height: 58vh;
   overflow-y: auto;
   border-radius: 0 0 12px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #3B82F6 #0A0E27;
+}
+
+.modal-contenido::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-contenido::-webkit-scrollbar-track {
+  background: #0A0E27;
+  border-radius: 0 0 4px 0;
+}
+
+.modal-contenido::-webkit-scrollbar-thumb {
+  background: #3B82F6;
+  border-radius: 4px;
+  border: 2px solid #0A0E27;
+}
+
+.modal-contenido::-webkit-scrollbar-thumb:hover {
+  background: #60A5FA;
 }
 
 .contenedor-csv {
@@ -274,6 +306,26 @@ footer {
   overflow-y: auto;
   max-height: 420px;
   border-radius: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #3B82F6 #0A0E27;
+}
+
+.tabla-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.tabla-scroll::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb {
+  background: #3B82F6;
+  border-radius: 4px;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb:hover {
+  background: #60A5FA;
 }
 
 table {
@@ -354,37 +406,82 @@ tr:hover {
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-    padding-bottom: 40px;
+@media (max-width: 899px) {
+  .bloques-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
-  h1 { font-size: 28px; }
-  table { font-size: 11px; }
-  th, td { padding: 8px 5px; }
-  .contenedor-csv {
-    width: 96%;
-    padding: 12px;
-  }
-  .bloque {
-    padding: 20px 16px;
-    margin: 18px 0;
+  .bloques-grid .bloque {
+    margin: 0;
   }
 }
 
 @media (max-width: 600px) {
+  body {
+    font-size: 14px;
+    padding-bottom: 40px;
+  }
+  .container {
+    padding: 16px 12px;
+  }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+  .bloque {
+    padding: 18px 14px;
+    border-radius: 10px;
+  }
+  .fila {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .fila label {
+    text-align: center;
+    margin-bottom: -4px;
+  }
+  select, input[type="file"], button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  select {
+    width: 100%;
+  }
   .botones-principales {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   .boton-grande:last-child {
     grid-column: 1;
   }
-  select, input, button {
-    width: 100%;
+  .boton-grande {
+    font-size: 16px;
+    padding: 14px 16px;
   }
   .modal {
     width: 95%;
-    top: 5%;
+    top: 3%;
+    max-height: 90vh;
   }
-  h1 { font-size: 24px; }
+  .modal-contenido {
+    max-height: 50vh;
+    font-size: 12px;
+  }
+  table { font-size: 11px; }
+  th, td { padding: 7px 4px; }
+  .contenedor-csv {
+    width: 98%;
+    padding: 10px;
+    margin: 14px auto;
+  }
+  .nombre-csv {
+    font-size: 15px;
+  }
+  .boton-recargar {
+    width: 100%;
+    justify-content: center;
+  }
+  img {
+    width: 180px;
+  }
 }
