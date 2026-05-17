@@ -1,0 +1,252 @@
+body {
+  background-color: #004e64;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 15px;
+}
+
+h1, h2, label {
+  text-align: center;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+img {
+  display: block;
+  margin: 20px auto;
+  width: 250px;
+}
+
+.fila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+select, input[type="file"], button {
+  background-color: #004e64;
+  color: white;
+  border: 2px solid white;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  min-width: 180px;
+}
+
+button:hover {
+  background-color: #006680;
+  cursor: pointer;
+}
+
+select {
+  width: 300px;
+}
+
+.botones-principales {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.boton-grande {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 900px;
+  background-color: #1e1e1e;
+  border: 2px solid #0088ff;
+  border-radius: 12px;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.modal-header {
+  background-color: #0a2e3a;
+  padding: 12px 15px;
+  border-bottom: 1px solid #0088ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.modal-header span {
+  font-weight: bold;
+  color: #0088ff;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0 8px;
+  min-width: auto;
+}
+
+.modal-header button:hover {
+  color: #ff5555;
+  background: none;
+}
+
+.modal-contenido {
+  padding: 15px;
+  background-color: #0a0a0a;
+  color: #0088ff;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 13px;
+  max-height: 55vh;
+  overflow-y: auto;
+  border-radius: 0 0 10px 10px;
+}
+
+.contenedor-csv {
+  width: 90%;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: white;
+  color: #333;
+  min-width: 600px;
+}
+
+th {
+  background-color: #003b4d;
+  color: white;
+  padding: 12px 8px;
+  position: sticky;
+  top: 0;
+  font-weight: bold;
+  border: 1px solid #004e64;
+}
+
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e0e0e0;
+}
+
+.nombre-csv {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 4px solid white;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 40px;
+  color: #ccc;
+  font-style: italic;
+}
+
+.boton-recargar {
+  display: inline-block;
+  width: auto;
+  margin: 10px auto;
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  table {
+    font-size: 11px;
+  }
+  th, td {
+    padding: 6px 4px;
+  }
+  .contenedor-csv {
+    width: 95%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .botones-principales {
+    grid-template-columns: 1fr;
+  }
+  select, input, button {
+    width: 100%;
+  }
+  .modal {
+    width: 95%;
+    top: 5%;
+  }
+}

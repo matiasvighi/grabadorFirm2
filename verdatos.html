@@ -1,279 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#004e64">
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <title>Visualizador de Dispositivos</title>
-    <style>
-        body {
-            background-color: #004e64;
-            color: white;
-            font-size: 18px;
-            font-family: sans-serif;
-            margin: 0;
-            padding-bottom: 100px;
-        }
-        h1, h2, label {
-            text-align: center;
-        }
-        h1 {
-            margin-top: 20px;
-            font-size: 28px;
-        }
-        h2 {
-            font-size: 22px;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        img {
-            display: block;
-            margin: 20px auto;
-            width: 300px;
-        }
-        .contenedor-csv {
-            width: 90%;
-            margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-        .tabla-scroll {
-            overflow-x: auto;
-            overflow-y: auto;
-            max-height: 400px;
-            border-radius: 8px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            background-color: white;
-            color: #333;
-            min-width: 600px;
-        }
-        th {
-            background-color: #003b4d;
-            color: white;
-            padding: 12px 8px;
-            position: sticky;
-            top: 0;
-            font-weight: bold;
-            border: 1px solid #004e64;
-        }
-        td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e0e0e0;
-        }
-        .nombre-csv {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            padding-left: 10px;
-            border-left: 4px solid white;
-        }
-        .sin-datos {
-            text-align: center;
-            padding: 40px;
-            color: #ccc;
-            font-style: italic;
-        }
-        .fila {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        select, input[type="file"], button {
-            background-color: #004e64;
-            color: white;
-            border: 2px solid white;
-            padding: 10px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        select {
-            width: 300px;
-        }
-        select:hover, button:hover {
-            background-color: #006680;
-        }
-        .boton-grande {
-            display: block;
-            width: 60%;
-            margin: 30px auto;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px;
-        }
-        .boton-recargar {
-            display: inline-block;
-            width: auto;
-            margin: 10px auto;
-            padding: 8px 20px;
-            font-size: 16px;
-        }
-        footer {
-            position: fixed;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            font-size: 16px;
-        }
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-            table {
-                font-size: 11px;
-            }
-            th, td {
-                padding: 6px 4px;
-            }
-            .contenedor-csv {
-                width: 95%;
-                padding: 10px;
-            }
-        }
-    </style>
-    <script>
-        async function cargarCSVs() {
-            try {
-                const response = await fetch('/listado/csvs');
-                const csvs = await response.json();
-                const contenedor = document.getElementById('contenedorCSVs');
-                contenedor.innerHTML = '';
-
-                if (csvs.length === 0) {
-                    contenedor.innerHTML = '<div class="sin-datos">📭 No hay archivos CSV disponibles</div>';
-                    return;
-                }
-
-                for (const csv of csvs) {
-                    await mostrarCSV(csv, contenedor);
-                }
-            } catch (error) {
-                console.error('Error cargando CSVs:', error);
-                document.getElementById('contenedorCSVs').innerHTML = '<div class="sin-datos">❌ Error al cargar los archivos CSV</div>';
-            }
-        }
-
-        async function mostrarCSV(nombreArchivo, contenedor) {
-            try {
-                const response = await fetch(`/csv/${nombreArchivo}`);
-                const texto = await response.text();
-
-                // Parsear CSV
-                const lineas = texto.trim().split('\n');
-                if (lineas.length === 0) return;
-
-                const encabezados = lineas[0].split(';');
-                const datos = lineas.slice(1).map(linea => linea.split(';'));
-
-                // Crear contenedor para este CSV
-                const divCSV = document.createElement('div');
-                divCSV.className = 'contenedor-csv';
-
-                const titulo = document.createElement('div');
-                titulo.className = 'nombre-csv';
-                titulo.innerHTML = `📄 ${nombreArchivo} <span style="font-size:12px; font-weight:normal;">(${datos.length} registros)</span>`;
-                divCSV.appendChild(titulo);
-
-                const scrollDiv = document.createElement('div');
-                scrollDiv.className = 'tabla-scroll';
-
-                const tabla = document.createElement('table');
-
-                // Crear encabezados
-                const thead = document.createElement('thead');
-                const trHead = document.createElement('tr');
-                for (let encabezado of encabezados) {
-                    const th = document.createElement('th');
-                    th.textContent = encabezado.trim();
-                    trHead.appendChild(th);
-                }
-                thead.appendChild(trHead);
-                tabla.appendChild(thead);
-
-                // Crear cuerpo
-                const tbody = document.createElement('tbody');
-                for (let fila of datos) {
-                    const tr = document.createElement('tr');
-                    for (let celda of fila) {
-                        const td = document.createElement('td');
-                        // Formatear timestamp si existe
-                        let contenido = celda.trim();
-                        if (encabezados[tr.cells?.length] === 'Timestamp_Grabado' && !isNaN(parseInt(contenido)) && contenido.length > 5) {
-                            const fecha = new Date(parseInt(contenido) * 1000);
-                            if (!isNaN(fecha.getTime())) {
-                                contenido = `${contenido}<br><small>${fecha.toLocaleString('es-AR')}</small>`;
-                            }
-                        }
-                        td.innerHTML = contenido;
-                        tr.appendChild(td);
-                    }
-                    tbody.appendChild(tr);
-                }
-                tabla.appendChild(tbody);
-
-                scrollDiv.appendChild(tabla);
-                divCSV.appendChild(scrollDiv);
-                contenedor.appendChild(divCSV);
-
-            } catch (error) {
-                console.error(`Error cargando ${nombreArchivo}:`, error);
-                const divError = document.createElement('div');
-                divError.className = 'contenedor-csv';
-                divError.innerHTML = `<div class="nombre-csv">⚠️ ${nombreArchivo}</div><div class="sin-datos">No se pudo cargar este archivo</div>`;
-                contenedor.appendChild(divError);
-            }
-        }
-
-        function recargar() {
-            document.getElementById('contenedorCSVs').innerHTML = '<div style="text-align:center; padding:40px;">🔄 Cargando...</div>';
-            cargarCSVs();
-        }
-
-        function descargarCSV() {
-            window.location.href = "/descargar";
-        }
-
-        function volverAlGestor() {
-            window.location.href = "/";
-        }
-
-        window.onload = () => {
-            cargarCSVs();
-        };
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#004e64">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/style.css">
+  <title>Visualizador de Dispositivos</title>
 </head>
 <body>
-    <img src="Logo.png" alt="Logo">
+  <img src="Logo.png" alt="Logo">
 
-    <h1>Visualizador de Dispositivos</h1>
+  <h1>Visualizador de Dispositivos</h1>
 
-    <div class="fila">
-        <button onclick="recargar()" class="boton-recargar">🔄 Recargar datos</button>
-        <button onclick="descargarCSV()" class="boton-recargar">⬇️ Descargar </button>
-        <button onclick="volverAlGestor()" class="boton-recargar">🏠 Volver al Gestor</button>
-    </div>
+  <div class="fila">
+    <button onclick="recargar()" class="boton-recargar">🔄 Recargar datos</button>
+    <button onclick="descargarCSV()" class="boton-recargar">⬇️ Descargar</button>
+    <button onclick="volverAlGestor()" class="boton-recargar">🏠 Volver al Gestor</button>
+  </div>
 
-    <div id="contenedorCSVs">
-        <div style="text-align:center; padding:40px;">🔄 Cargando archivos CSV...</div>
-    </div>
+  <div id="contenedorCSVs">
+    <div style="text-align:center; padding:40px;">🔄 Cargando archivos CSV...</div>
+  </div>
 
-    <footer>FirmWriter by Maty ppc tools | Visualizador de Dispositivos</footer>
+  <footer>FirmWriter by Maty ppc tools | Visualizador de Dispositivos</footer>
+
+  <script src="/verdatos.js"></script>
 </body>
 </html>

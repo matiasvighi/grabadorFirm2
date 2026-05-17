@@ -1,420 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#004e64">
-    <title>FirmWriter</title>
-
-    <style>
-        body {
-            background-color: #004e64;
-            color: white;
-            font-family: sans-serif;
-            margin: 0;
-            padding-bottom: 80px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            background: rgba(0,0,0,0.15);
-            border-radius: 15px;
-        }
-
-        h1, label {
-            text-align: center;
-        }
-
-        img {
-            display: block;
-            margin: 20px auto;
-            width: 250px;
-        }
-
-        .fila {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 15px 0;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        form {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        select, input[type="file"], button {
-            background-color: #004e64;
-            color: white;
-            border: 2px solid white;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            min-width: 180px;
-        }
-
-        button:hover {
-            background-color: #006680;
-            cursor: pointer;
-        }
-
-        select {
-            width: 300px;
-        }
-
-        .botones-principales {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: 600px;
-            margin: 30px auto;
-        }
-
-        .boton-grande {
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 15px;
-        }
-
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* Modal de progreso */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 85%;
-            max-width: 900px;
-            background-color: #1e1e1e;
-            border: 2px solid #0088ff;
-            border-radius: 12px;
-            z-index: 9999;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            font-family: 'Courier New', monospace;
-        }
-
-        .modal-header {
-            background-color: #0a2e3a;
-            padding: 12px 15px;
-            border-bottom: 1px solid #0088ff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .modal-header span {
-            font-weight: bold;
-            color: #0088ff;
-        }
-
-        .modal-header button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 0 8px;
-            min-width: auto;
-        }
-
-        .modal-header button:hover {
-            color: #ff5555;
-            background: none;
-        }
-
-        .modal-contenido {
-            padding: 15px;
-            background-color: #0a0a0a;
-            color: #0088ff;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 13px;
-            max-height: 55vh;
-            overflow-y: auto;
-            border-radius: 0 0 10px 10px;
-        }
-
-        /* Mobile */
-        @media (max-width: 600px) {
-            .botones-principales {
-                grid-template-columns: 1fr;
-            }
-
-            select, input, button {
-                width: 100%;
-            }
-
-            .modal {
-                width: 95%;
-                top: 5%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#004e64">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="stylesheet" href="/style.css">
+  <title>FirmWriter</title>
 </head>
-
 <body>
 
 <div class="container">
+  <img src="Logo.png" alt="Logo">
 
-    <img src="Logo.png" alt="Logo">
+  <div class="fila">
+    <input type="file" id="fileFirm">
+    <button onclick="subirArchivo('fileFirm', '/upload/firms', 'comboFirm')">Subir Firm</button>
+  </div>
 
-    <!-- Firm -->
-    <div class="fila">
-        <input type="file" id="fileFirm">
-        <button onclick="subirArchivo('fileFirm', '/upload/firms', 'comboFirm')">Subir Firm</button>
-    </div>
+  <div class="fila">
+    <label>Elegir Firm:</label>
+    <select id="comboFirm"></select>
+  </div>
 
-    <div class="fila">
-        <label>Elegir Firm:</label>
-        <select id="comboFirm"></select>
-    </div>
+  <div class="fila">
+    <input type="file" id="fileImagen">
+    <button onclick="subirArchivo('fileImagen', '/upload/imagenes', 'comboImagen')">Subir Imagen</button>
+  </div>
 
-    <!-- Imagen -->
-    <div class="fila">
-        <input type="file" id="fileImagen">
-        <button onclick="subirArchivo('fileImagen', '/upload/imagenes', 'comboImagen')">Subir Imagen</button>
-    </div>
+  <div class="fila">
+    <label>Elegir Imagen:</label>
+    <select id="comboImagen"></select>
+  </div>
 
-    <div class="fila">
-        <label>Elegir Imagen:</label>
-        <select id="comboImagen"></select>
-    </div>
+  <div class="fila">
+    <input type="file" id="fileScript">
+    <button onclick="subirArchivo('fileScript', '/upload/scripts', 'comboScript')">Subir Script</button>
+  </div>
 
-    <!-- Script -->
-    <div class="fila">
-        <input type="file" id="fileScript">
-        <button onclick="subirArchivo('fileScript', '/upload/scripts', 'comboScript')">Subir Script</button>
-    </div>
+  <div class="fila">
+    <label>Elegir Script:</label>
+    <select id="comboScript"></select>
+  </div>
 
-    <div class="fila">
-        <label>Elegir Script:</label>
-        <select id="comboScript"></select>
-    </div>
+  <div class="botones-principales">
+    <button class="boton-grande" onclick="subirTodo()">Subir Firm e Imagen</button>
+    <button class="boton-grande" onclick="descargarArchivos()">Descargar archivos</button>
+    <a href="/verdatos.html" style="text-decoration:none;">
+      <button class="boton-grande">Visualizar Grabados</button>
+    </a>
+  </div>
 
-    <!-- Botones -->
-    <div class="botones-principales">
-        <button class="boton-grande" onclick="subirTodo()">
-            Subir Firm e Imagen
-        </button>
-
-        <button class="boton-grande" onclick="descargarArchivos()">
-            Descargar archivos
-        </button>
-
-        <a href="/verdatos.html" style="text-decoration:none;">
-            <button class="boton-grande">
-                Visualizar Grabados
-            </button>
-        </a>
-    </div>
-
-   <footer>
+  <footer>
     FirmWriter by Maty ppc tools <span style="color:red; font-weight:bold;">*nunca publicar esta página en internet!!</span>
-   </footer>
-
+  </footer>
 </div>
 
-<!-- Modal de progreso -->
 <div id="progresoModal" class="modal">
-    <div class="modal-header">
-        <span>📡 Progreso de subida</span>
-        <button onclick="cerrarModal()">✖</button>
-    </div>
-    <div class="modal-contenido">
-        <pre id="resultadoTexto">Iniciando proceso...</pre>
-    </div>
+  <div class="modal-header">
+    <span>📡 Progreso de subida</span>
+    <button onclick="cerrarModal()">✖</button>
+  </div>
+  <div class="modal-contenido">
+    <pre id="resultadoTexto">Iniciando proceso...</pre>
+  </div>
 </div>
 
-<script>
-    let intervaloLog = null;
-
-    async function cargarCombos() {
-        const cargar = async (ruta, id) => {
-            try {
-                const datos = await fetch(ruta).then(res => res.json());
-                const combo = document.getElementById(id);
-                combo.innerHTML = '';
-                if (datos.length === 0) {
-                    const opt = document.createElement('option');
-                    opt.text = '— sin archivos —';
-                    combo.add(opt);
-                } else {
-                    datos.forEach(el => {
-                        const opt = document.createElement('option');
-                        opt.text = el;
-                        combo.add(opt);
-                    });
-                }
-            } catch(e) {
-                console.error("Error cargando " + ruta, e);
-            }
-        };
-
-        await cargar('/listado/firms', 'comboFirm');
-        await cargar('/listado/imagenes', 'comboImagen');
-        await cargar('/listado/scripts', 'comboScript');
-    }
-
-    async function subirArchivo(inputId, ruta, comboId) {
-        const input = document.getElementById(inputId);
-        const archivo = input.files[0];
-        if (!archivo) {
-            alert("Seleccioná un archivo primero.");
-            return;
-        }
-        const formData = new FormData();
-        formData.append('file', archivo);
-        try {
-            const resp = await fetch(ruta, { method: 'POST', body: formData });
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            input.value = '';
-            await cargarCombos();
-        } catch (e) {
-            alert("Error al subir archivo: " + e.message);
-        }
-    }
-
-    function subirTodo() {
-        const firm = document.getElementById("comboFirm").value;
-        const imagen = document.getElementById("comboImagen").value;
-        const script = document.getElementById("comboScript").value;
-
-        // Validaciones básicas
-        if (!firm || firm === '— sin archivos —') {
-            alert("❌ No hay ningún firm seleccionado o disponible.");
-            return;
-        }
-        // Mostrar modal y limpiar contenido previo
-        const modal = document.getElementById("progresoModal");
-        const textoPre = document.getElementById("resultadoTexto");
-        textoPre.textContent = "⏳ Conectando con el servidor...\n";
-        modal.style.display = "block";
-
-        // Si ya hay un intervalo corriendo, lo detenemos
-        if (intervaloLog) clearInterval(intervaloLog);
-
-        // Normalizar: si el combo muestra "— sin archivos —", mandar null
-        const normalizar = (v) => v && v !== '— sin archivos —' ? v : null;
-        fetch('/subirTodo', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firm, imagen: normalizar(imagen), script: normalizar(script) })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
-            // Iniciar polling de progreso cada 1 segundo
-            intervaloLog = setInterval(cargarLog, 1000);
-            // Opcional: timeout para evitar polling infinito (2 minutos)
-            setTimeout(() => {
-                if (intervaloLog) {
-                    clearInterval(intervaloLog);
-                    intervaloLog = null;
-                    const textoArea = document.getElementById("resultadoTexto");
-                    textoArea.textContent += "\n\n⚠️ Tiempo de espera agotado. El proceso podría seguir ejecutándose en segundo plano.";
-                }
-            }, 120000);
-        })
-        .catch(error => {
-            console.error("Error en subirTodo:", error);
-            document.getElementById("resultadoTexto").textContent = `❌ Error al iniciar la subida: ${error.message}`;
-            // No iniciamos polling si hubo error
-        });
-    }
-
-    function cargarLog() {
-        fetch('/progreso')
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error("No se pudo obtener progreso");
-                }
-                return res.text();
-            })
-            .then(data => {
-                // Procesar líneas con posible \r (para simular actualización en misma línea)
-                const lineas = data.split(/\r?\n/);
-                const lineasProcesadas = [];
-                for (let linea of lineas) {
-                    if (linea.includes('\r')) {
-                        const partes = linea.split('\r');
-                        // Reemplazar la última línea mostrada por la última versión después del \r
-                        if (lineasProcesadas.length > 0) lineasProcesadas.pop();
-                        lineasProcesadas.push(partes[partes.length - 1]);
-                    } else {
-                        lineasProcesadas.push(linea);
-                    }
-                }
-                const textoCompleto = lineasProcesadas.join('\n');
-                const textoElemento = document.getElementById("resultadoTexto");
-                textoElemento.textContent = textoCompleto;
-
-                // Auto-scroll al final
-                const modalContent = document.querySelector(".modal-contenido");
-                if (modalContent) modalContent.scrollTop = modalContent.scrollHeight;
-
-                // Si el texto contiene indicadores de finalización, podemos parar el polling
-                if (textoCompleto.includes("completado") || textoCompleto.includes("finalizado") || textoCompleto.includes("error")) {
-                    if (intervaloLog) {
-                        clearInterval(intervaloLog);
-                        intervaloLog = null;
-                    }
-                }
-            })
-            .catch(err => {
-                console.warn("Error cargando progreso:", err);
-                // No detenemos el polling automáticamente, pero mostramos mensaje
-                const textoElem = document.getElementById("resultadoTexto");
-                if (textoElem && !textoElem.textContent.includes("(esperando datos)")) {
-                    textoElem.textContent += "\n⏳ (esperando actualización del servidor...)";
-                }
-            });
-    }
-
-    function cerrarModal() {
-        if (intervaloLog) {
-            clearInterval(intervaloLog);
-            intervaloLog = null;
-        }
-        document.getElementById("progresoModal").style.display = "none";
-    }
-
-    function descargarArchivos() {
-        window.location.href = "/descargar";
-    }
-
-    // Al cargar la página, inicializar combos y agregar listener para cerrar modal con ESC
-    window.onload = () => {
-        cargarCombos();
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") {
-                const modal = document.getElementById("progresoModal");
-                if (modal && modal.style.display === "block") {
-                    cerrarModal();
-                }
-            }
-        });
-    };
-
-    // Si el usuario hace clic fuera del modal (en el fondo oscuro virtual) no lo cerramos por diseño,
-    // pero podría implementarse si se desea. Preferimos mantenerlo hasta que pulse la X o ESC.
-</script>
-
+<script src="/script.js"></script>
 </body>
 </html>
