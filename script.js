@@ -1,3 +1,9 @@
+const ICONO = {
+  reloj: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  error: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+  alerta: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+};
+
 let intervaloLog = null;
 
 async function cargarCombos() {
@@ -51,12 +57,12 @@ function subirTodo() {
   const script = document.getElementById('comboScript').value;
 
   if (!firm || firm === '— sin archivos —') {
-    alert('❌ No hay ningún firm seleccionado o disponible.');
+    alert('No hay ningún firm seleccionado o disponible.');
     return;
   }
   const modal = document.getElementById('progresoModal');
   const textoPre = document.getElementById('resultadoTexto');
-  textoPre.textContent = '⏳ Conectando con el servidor...\n';
+  textoPre.innerHTML = 'Conectando con el servidor...\n';
   modal.style.display = 'block';
 
   if (intervaloLog) clearInterval(intervaloLog);
@@ -75,13 +81,13 @@ function subirTodo() {
         clearInterval(intervaloLog);
         intervaloLog = null;
         const textoArea = document.getElementById('resultadoTexto');
-        textoArea.textContent += '\n\n⚠️ Tiempo de espera agotado. El proceso podría seguir ejecutándose en segundo plano.';
+        textoArea.innerHTML += '\n\nTiempo de espera agotado. El proceso podría seguir ejecutándose en segundo plano.';
       }
     }, 120000);
   })
   .catch(error => {
     console.error('Error en subirTodo:', error);
-    document.getElementById('resultadoTexto').textContent = `❌ Error al iniciar la subida: ${error.message}`;
+    document.getElementById('resultadoTexto').innerHTML = 'Error al iniciar la subida: ' + error.message;
   });
 }
 
@@ -119,7 +125,7 @@ function cargarLog() {
       console.warn('Error cargando progreso:', err);
       const textoElem = document.getElementById('resultadoTexto');
       if (textoElem && !textoElem.textContent.includes('(esperando datos)')) {
-        textoElem.textContent += '\n⏳ (esperando actualización del servidor...)';
+        textoElem.innerHTML += '\n(esperando actualización del servidor...)';
       }
     });
 }

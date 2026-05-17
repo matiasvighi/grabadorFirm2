@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+
+*:focus-visible {
+  outline: 2px solid #0088ff;
+  outline-offset: 2px;
+}
+
 body {
   background-color: #004e64;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Nunito', sans-serif;
   margin: 0;
   padding-bottom: 80px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fredoka', sans-serif;
 }
 
 .container {
@@ -59,6 +70,7 @@ select, input[type="file"], button {
   font-size: 16px;
   border-radius: 5px;
   min-width: 180px;
+  transition: background-color 200ms, border-color 200ms, box-shadow 200ms;
 }
 
 button:hover {
@@ -66,8 +78,13 @@ button:hover {
   cursor: pointer;
 }
 
+button:active {
+  background-color: #003b4d;
+}
+
 select {
   width: 300px;
+  cursor: pointer;
 }
 
 .botones-principales {
@@ -118,7 +135,10 @@ footer {
   border-radius: 10px 10px 0 0;
 }
 
-.modal-header span {
+.modal-header .icono-modal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: bold;
   color: #0088ff;
 }
@@ -131,6 +151,7 @@ footer {
   cursor: pointer;
   padding: 0 8px;
   min-width: auto;
+  transition: color 200ms;
 }
 
 .modal-header button:hover {
@@ -205,6 +226,9 @@ tr:hover {
   margin-bottom: 10px;
   padding-left: 10px;
   border-left: 4px solid white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .sin-datos {
@@ -215,11 +239,25 @@ tr:hover {
 }
 
 .boton-recargar {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   width: auto;
   margin: 10px auto;
   padding: 8px 20px;
   font-size: 16px;
+}
+
+.icono-btn {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 768px) {
